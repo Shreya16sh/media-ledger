@@ -1,0 +1,23 @@
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.stat-card {
+  border-left: 4px solid var(--pink-primary);
+}
+
+.stat-card.accent { border-left-color: var(--success); }
+.stat-card.warn { border-left-color: var(--warning); }
+
+.stat-label {
+  font-size: 13px;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+}
+
+.stat-card h2 {
+  font-size: 26px;
+  margin: 0;
+}

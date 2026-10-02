@@ -1,0 +1,171 @@
+/* =========================================================
+   MediaLedger - global design system
+   A "media agency enterprise" pink theme: confident magenta-rose
+   as the working accent, warm charcoal ink, soft blush surfaces.
+========================================================= */
+
+:root {
+  --pink-primary: #C2185B;
+  --pink-primary-dark: #99123F;
+  --pink-soft: #F8E4EC;
+  --pink-tint: #FDF3F7;
+  --ink: #241E29;
+  --ink-muted: #8A7A88;
+  --surface: #FFFFFF;
+  --border: #EBD9E3;
+  --success: #2E7D5B;
+  --warning: #B4791F;
+  --danger: #B3261E;
+
+  --font-display: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --radius: 10px;
+  --shadow: 0 2px 14px rgba(153, 18, 63, 0.08);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--pink-tint);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  margin: 0 0 8px 0;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0 0 12px 0; line-height: 1.55; }
+
+a { color: var(--pink-primary); text-decoration: none; }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+/* ---- shared building blocks used across components ---- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.08s ease, box-shadow 0.15s ease;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--pink-primary);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--pink-primary-dark); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--pink-primary);
+  border: 1.5px solid var(--pink-primary);
+}
+.btn-outline:hover { background: var(--pink-soft); }
+
+.btn-danger {
+  background: #fff;
+  color: var(--danger);
+  border: 1.5px solid var(--danger);
+}
+.btn-danger:hover { background: #fdeceb; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+}
+
+input, select {
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  width: 100%;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--pink-primary);
+  box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.12);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  margin-bottom: 6px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--border);
+}
+td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+tr:hover td { background: var(--pink-tint); }
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge-pending, .badge-unpaid { background: #FBEFDD; color: var(--warning); }
+.badge-confirmed, .badge-paid { background: #E1F1E9; color: var(--success); }
+.badge-cancelled, .badge-overdue { background: #FBE4E2; color: var(--danger); }
+
+.error-text {
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: -6px;
+  margin-bottom: 12px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.search-bar {
+  max-width: 320px;
+}

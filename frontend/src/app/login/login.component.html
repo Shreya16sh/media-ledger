@@ -1,0 +1,27 @@
+<div class="login-wrap">
+  <div class="login-card">
+    <div class="brand">
+      <div class="brand-mark">MS</div>
+      <div>
+        <h1>MediaLedger</h1>
+        <p class="tagline">Media Invoice Tracker</p>
+      </div>
+    </div>
+
+    <form (ngSubmit)="onSubmit()">
+      <label for="username">Username</label>
+      <input id="username" type="text" [(ngModel)]="username" name="username" placeholder="admin" autocomplete="username" />
+
+      <label for="password" class="password-label">Password</label>
+      <input id="password" type="password" [(ngModel)]="password" name="password" placeholder="••••••••" autocomplete="current-password" />
+
+      <p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+
+      <button type="submit" class="btn btn-primary submit-btn" [disabled]="isLoading">
+        {{ isLoading ? 'Signing in...' : 'Sign in' }}
+      </button>
+    </form>
+
+    <p class="hint">Try the demo account: <strong>admin</strong> / <strong>admin123</strong></p>
+  </div>
+</div>

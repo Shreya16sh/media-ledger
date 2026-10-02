@@ -1,0 +1,94 @@
+<div class="page-header">
+  <div>
+    <h1>Bookings</h1>
+    <p>Media placements booked for each client campaign.</p>
+  </div>
+  <button class="btn btn-primary" (click)="openAddForm()">+ New booking</button>
+</div>
+
+<div class="search-bar" style="margin-bottom: 18px;">
+  <input
+    type="text"
+    placeholder="Search by client, campaign, or channel..."
+    [(ngModel)]="searchTerm"
+    (keyup.enter)="onSearch()"
+  />
+</div>
+
+<p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+<p *ngIf="isLoading">Loading bookings...</p>
+
+<div class="card" *ngIf="!isLoading">
+  <table>
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Channel</th>
+        <th>Campaign</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of bookings">
+        <td>{{ b.ClientName }}</td>
+        <td>{{ b.MediaChannel }}</td>
+        <td>{{ b.Campaign }}</td>
+        <td>{{ b.BookingDate | date: 'mediumDate' }}</td>
+        <td>₹{{ b.Amount | number }}</td>
+        <td><span class="badge" [ngClass]="'badge-' + b.Status.toLowerCase()">{{ b.Status }}</span></td>
+        <td class="actions">
+          <button class="btn btn-outline" (click)="openEditForm(b)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteBooking(b)">Delete</button>
+        </td>
+      </tr>
+      <tr *ngIf="bookings.length === 0">
+        <td colspan="7">No bookings found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Add / Edit modal -->
+<div class="modal-backdrop" *ngIf="showForm" (click)="cancelForm()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <h3>{{ editingId ? 'Edit booking' : 'New booking' }}</h3>
+
+    <form (ngSubmit)="saveBooking()">
+      <label>Client name</label>
+      <input type="text" [(ngModel)]="formModel.ClientName" name="clientName" required />
+
+      <label>Media channel</label>
+      <select [(ngModel)]="formModel.MediaChannel" name="mediaChannel">
+        <option value="Digital">Digital</option>
+        <option value="TV">TV</option>
+        <option value="Print">Print</option>
+        <option value="Radio">Radio</option>
+        <option value="OOH">OOH (Out of home)</option>
+      </select>
+
+      <label>Campaign</label>
+      <input type="text" [(ngModel)]="formModel.Campaign" name="campaign" required />
+
+      <label>Booking date</label>
+      <input type="date" [(ngModel)]="formModel.BookingDate" name="bookingDate" required />
+
+      <label>Amount (₹)</label>
+      <input type="number" [(ngModel)]="formModel.Amount" name="amount" min="0" required />
+
+      <label>Status</label>
+      <select [(ngModel)]="formModel.Status" name="status">
+        <option value="Pending">Pending</option>
+        <option value="Confirmed">Confirmed</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" (click)="cancelForm()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save booking</button>
+      </div>
+    </form>
+  </div>
+</div>

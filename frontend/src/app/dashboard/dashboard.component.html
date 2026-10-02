@@ -1,0 +1,55 @@
+<div class="page-header">
+  <div>
+    <h1>Dashboard</h1>
+    <p>A quick snapshot of bookings and billing.</p>
+  </div>
+</div>
+
+<p *ngIf="isLoading">Loading dashboard...</p>
+<p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+
+<div *ngIf="summary" class="stat-grid">
+  <div class="card stat-card">
+    <p class="stat-label">Total bookings</p>
+    <h2>{{ summary.totalBookings }}</h2>
+  </div>
+  <div class="card stat-card">
+    <p class="stat-label">Total invoices</p>
+    <h2>{{ summary.totalInvoices }}</h2>
+  </div>
+  <div class="card stat-card accent">
+    <p class="stat-label">Revenue collected</p>
+    <h2>₹{{ summary.totalRevenue | number }}</h2>
+  </div>
+  <div class="card stat-card warn">
+    <p class="stat-label">Outstanding amount</p>
+    <h2>₹{{ summary.outstandingAmount | number }}</h2>
+  </div>
+</div>
+
+<div *ngIf="summary" class="card" style="margin-top: 24px;">
+  <h3>Recent bookings</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Channel</th>
+        <th>Campaign</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of summary.recentBookings">
+        <td>{{ b.ClientName }}</td>
+        <td>{{ b.MediaChannel }}</td>
+        <td>{{ b.Campaign }}</td>
+        <td>{{ b.BookingDate | date: 'mediumDate' }}</td>
+        <td><span class="badge" [ngClass]="'badge-' + b.Status.toLowerCase()">{{ b.Status }}</span></td>
+      </tr>
+      <tr *ngIf="summary.recentBookings.length === 0">
+        <td colspan="5">No bookings yet. Head to the Bookings page to add one.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

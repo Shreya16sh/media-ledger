@@ -1,0 +1,90 @@
+<div class="page-header">
+  <div>
+    <h1>Invoices</h1>
+    <p>Bills raised against each booking, and their payment status.</p>
+  </div>
+  <button class="btn btn-primary" (click)="openAddForm()">+ New invoice</button>
+</div>
+
+<div class="search-bar" style="margin-bottom: 18px;">
+  <input
+    type="text"
+    placeholder="Search by invoice #, client, or status..."
+    [(ngModel)]="searchTerm"
+    (keyup.enter)="onSearch()"
+  />
+</div>
+
+<p *ngIf="errorMessage" class="error-text">{{ errorMessage }}</p>
+<p *ngIf="isLoading">Loading invoices...</p>
+
+<div class="card" *ngIf="!isLoading">
+  <table>
+    <thead>
+      <tr>
+        <th>Invoice #</th>
+        <th>Client</th>
+        <th>Campaign</th>
+        <th>Date</th>
+        <th>Amount</th>
+        <th>Payment</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let inv of invoices">
+        <td>{{ inv.InvoiceNumber }}</td>
+        <td>{{ inv.ClientName }}</td>
+        <td>{{ inv.Campaign }}</td>
+        <td>{{ inv.InvoiceDate | date: 'mediumDate' }}</td>
+        <td>₹{{ inv.Amount | number }}</td>
+        <td><span class="badge" [ngClass]="'badge-' + inv.PaymentStatus.toLowerCase()">{{ inv.PaymentStatus }}</span></td>
+        <td class="actions">
+          <button class="btn btn-outline" (click)="openEditForm(inv)">Edit</button>
+          <button class="btn btn-danger" (click)="deleteInvoice(inv)">Delete</button>
+        </td>
+      </tr>
+      <tr *ngIf="invoices.length === 0">
+        <td colspan="7">No invoices found.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Add / Edit modal -->
+<div class="modal-backdrop" *ngIf="showForm" (click)="cancelForm()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <h3>{{ editingId ? 'Edit invoice' : 'New invoice' }}</h3>
+
+    <form (ngSubmit)="saveInvoice()">
+      <label>Booking</label>
+      <select [(ngModel)]="formModel.BookingId" name="bookingId">
+        <option [value]="0" disabled>Select a booking...</option>
+        <option *ngFor="let b of bookingOptions" [value]="b.BookingId">
+          {{ b.ClientName }} — {{ b.Campaign }}
+        </option>
+      </select>
+
+      <label>Invoice number</label>
+      <input type="text" [(ngModel)]="formModel.InvoiceNumber" name="invoiceNumber" placeholder="INV-1004" required />
+
+      <label>Invoice date</label>
+      <input type="date" [(ngModel)]="formModel.InvoiceDate" name="invoiceDate" required />
+
+      <label>Amount (₹)</label>
+      <input type="number" [(ngModel)]="formModel.Amount" name="amount" min="0" required />
+
+      <label>Payment status</label>
+      <select [(ngModel)]="formModel.PaymentStatus" name="paymentStatus">
+        <option value="Unpaid">Unpaid</option>
+        <option value="Paid">Paid</option>
+        <option value="Overdue">Overdue</option>
+      </select>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" (click)="cancelForm()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save invoice</button>
+      </div>
+    </form>
+  </div>
+</div>
