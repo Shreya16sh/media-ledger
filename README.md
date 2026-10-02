@@ -1,6 +1,6 @@
 # MediaLedger — Media Invoice Tracker
 
-A small full-stack app inspired by media-agency operations work (like at Publicis Re:Sources):
+A small full-stack app for media agency:
 you log in, see a dashboard of totals, and manage **bookings** (media placements booked for a
 client campaign) and **invoices** (bills raised against those bookings).
 
