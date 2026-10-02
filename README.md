@@ -176,3 +176,14 @@ that's usually enough to figure out exactly which line is causing it.
 - Feel free to add more fields (e.g. a client contact email, an invoice due date) by adding a
   column in `schema.sql`, then updating the matching route in `backend/routes/`, and finally
   the form fields in the matching Angular component.
+
+## 6. SnapShot of website
+<img width="956" height="535" alt="Screenshot 2026-10-02 235924" src="https://github.com/user-attachments/assets/90a8806b-c86a-4776-87c1-a243be88a710" />
+
+<img width="958" height="473" alt="Screenshot 2026-10-02 235947" src="https://github.com/user-attachments/assets/6d798bab-314d-48df-8bee-25f6af41a659" />
+
+<img width="955" height="473" alt="Screenshot 2026-10-03 000006" src="https://github.com/user-attachments/assets/4f2f8db6-e1dd-4396-a07f-9d8abf22906e" />
+
+<img width="958" height="471" alt="Screenshot 2026-10-03 000057" src="https://github.com/user-attachments/assets/01b30971-9c69-48e8-a9cd-5b05d8e5aac1" />
+
+<img width="959" height="469" alt="Screenshot 2026-10-03 000109" src="https://github.com/user-attachments/assets/10a2fa91-b8f0-4ac6-ace3-bd71847c68d9" />
